@@ -119,23 +119,19 @@ public class World {
                 int conflictYPos = otherCreatureIntention.yPosIfCommitted();
                 if (conflictXPos == xPos && conflictYPos == yPos) {
                     //conflict between 2 creatures intentions
+                    //TODO needs fixing
                     System.out.println("CONFLICT");
                     if (otherCreatureIntention.action == Action.DO_NOTHING) {
                         //already holds the pos
                         currentIntention.action = Action.DO_NOTHING;
-                    } else {
+                    }
+                    else if (currentIntention.action == Action.DO_NOTHING) {
                         otherCreatureIntention.action = Action.DO_NOTHING;
                     }
-                    if (currentIntention.action == Action.DO_NOTHING) {
-                        otherCreatureIntention.action = Action.DO_NOTHING;
-                    } else {
-                        currentIntention.action = Action.DO_NOTHING;
-                    }
-
-                    if (currentIntention.creature.size > otherCreatureIntention.creature.size) {
+                    else if (currentIntention.creature.size > otherCreatureIntention.creature.size) {
+                        //other loses because it is smaller
                         otherCreatureIntention.action = Action.DO_NOTHING;
                     }
-
                     else if (currentIntention.creature.size == otherCreatureIntention.creature.size) {
                         //none of them win, so both lose the move
                         otherCreatureIntention.action = Action.DO_NOTHING;
